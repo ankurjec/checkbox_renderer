@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>CheckBox</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pikaday@1.8.2/css/pikaday.css">
+  <link rel="stylesheet" media="screen" href="http://www.globalodds.org/file/handsontable/dist/handsontable.css">
+
+  <!-- <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  
+  <link rel="stylesheet" media="screen" href="http://www.globalodds.org/file/handsontable/dist/handsontable.css">
+  <link rel="stylesheet" media="screen" href="http://www.globalodds.org/file/handsontable/dist/pikaday/pikaday.css">
+  <script src="http://www.globalodds.org/file/handsontable/dist/pikaday/pikaday.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/dist/moment/moment.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/dist/zeroclipboard/ZeroClipboard.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/dist/numbro/numbro.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/dist/numbro/languages.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/dist/handsontable.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/demo/js/samples.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/demo/js/samples.js"></script>
+  <script src="http://www.globalodds.org/file/handsontable/demo/js/samples.js"></script> -->
+
+  <style>
+    body {
+		background: #ffffff;
+		padding: 0;
+		margin: 0;
+	  }
+	  
+	  th,
+	  td {
+		font: 12px sans-serif
+	  }
+	  
+	  .handsontable td.red,
+	  .handsontable td.yellow {
+		text-align: center
+	  }
+	  
+	  .handsontable td.red {
+		background: #F44336
+	  }
+	  
+	  .handsontable td.yellow {
+		background: #f0e226
+	  }
+  </style>
+</head>
+
+<body>
+	<h2>Renderer Examples:</h2>
+	<li>Checkbox Renderer</li>
+	<div id="example" class="hot1 hot handsontable"></div>
+</body>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+
+		var data = [{
+			name: 'Chowmein',
+			check: true,
+			pieces: '1',
+			number: 4
+		  }, {
+			name: 'Stawberry Cake',
+			check: true,
+			pieces: '4',
+			number: 0.99
+		  }, {
+			name: 'Paasta',
+			check: false,
+			pieces: '6',
+			number: 0.6
+		  }, {
+			name: 'Roti',
+			check: true,
+			pieces: '10',
+			number: 2
+		  }, {
+			name: 'Bread',
+			check: false,
+			pieces: '4',
+			number: 0.99
+		  }, {
+			name: 'Paneer',
+			check: true,
+			pieces: '1',
+			number: 1.5
+		  }],
+		  container,
+		  hot;
+	  
+		container = document.getElementById('example');
+		hot = new Handsontable(container, {
+		  data: data,
+		  colWidths: [300, 140, 150, 150],
+		  licenseKey: 'non-commercial-and-evaluation',
+		  colHeaders: ['Name of Product', 'On Stock', 'Pieces in a Package', 'Price'],
+		  columns: [{
+			data: 'name'
+		  }, {
+			data: 'check',
+			type: 'checkbox',
+			renderer: checkRenderer,
+			className: 'htCenter'
+		  }, {
+			type: 'text',
+			data: 'pieces',
+			className: 'htCenter'
+		  }, {
+			data: 'number',
+			type: 'numeric',
+			format: 'Rs.0.00'
+		  }]
+		});
+	  
+		function checkRenderer(instance, td, row, col, prop, value, cellProperties) {
+		  Handsontable.renderers.CheckboxRenderer.apply(this, arguments);
+		  if (value) {
+			td.className = 'yellow';
+		  } else {
+			td.className = 'red'
+		  }
+		}
+	  
+	  });
+
+
+</script>
+
+</html>
